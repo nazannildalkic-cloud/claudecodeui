@@ -21,39 +21,41 @@ const sessionHistories = new Map();
 
 /**
  * Get provider config by name
+ * @param {string} provider - Provider name
+ * @param {string} [customBaseUrl] - Optional custom base URL override
  */
-function getProviderConfig(provider) {
-  switch (provider) {
-    case 'openrouter':
-      return {
-        name: 'OpenRouter',
-        baseUrl: OPENROUTER_MODELS.BASE_URL,
-        defaultModel: OPENROUTER_MODELS.DEFAULT,
-        envKey: 'OPENROUTER_API_KEY',
-        extraHeaders: {
-          'HTTP-Referer': 'https://cloudcli.ai',
-          'X-Title': 'Claude Code UI'
-        }
-      };
-    case 'groq':
-      return {
-        name: 'Groq',
-        baseUrl: GROQ_MODELS.BASE_URL,
-        defaultModel: GROQ_MODELS.DEFAULT,
-        envKey: 'GROQ_API_KEY',
-        extraHeaders: {}
-      };
-    case 'gemini':
-      return {
-        name: 'Gemini',
-        baseUrl: GEMINI_MODELS.BASE_URL,
-        defaultModel: GEMINI_MODELS.DEFAULT,
-        envKey: 'GEMINI_API_KEY',
-        extraHeaders: {}
-      };
-    default:
-      throw new Error(`Unknown provider: ${provider}`);
+function getProviderConfig(provider, customBaseUrl) {
+  const configs = {
+    openrouter: {
+      name: 'OpenRouter',
+      baseUrl: customBaseUrl || OPENROUTER_MODELS.BASE_URL,
+      defaultModel: OPENROUTER_MODELS.DEFAULT,
+      envKey: 'OPENROUTER_API_KEY',
+      extraHeaders: {
+        'HTTP-Referer': 'https://cloudcli.ai',
+        'X-Title': 'Claude Code UI'
+      }
+    },
+    groq: {
+      name: 'Groq',
+      baseUrl: customBaseUrl || GROQ_MODELS.BASE_URL,
+      defaultModel: GROQ_MODELS.DEFAULT,
+      envKey: 'GROQ_API_KEY',
+      extraHeaders: {}
+    },
+    gemini: {
+      name: 'Gemini',
+      baseUrl: customBaseUrl || GEMINI_MODELS.BASE_URL,
+      defaultModel: GEMINI_MODELS.DEFAULT,
+      envKey: 'GEMINI_API_KEY',
+      extraHeaders: {}
+    }
+  };
+
+  if (!configs[provider]) {
+    throw new Error(`Unknown provider: ${provider}`);
   }
+  return configs[provider];
 }
 
 /**
@@ -80,10 +82,11 @@ export async function queryOpenAICompat(command, options = {}, ws) {
     apiKey,
     sessionId,
     projectPath,
-    cwd
+    cwd,
+    customBaseUrl
   } = options;
 
-  const config = getProviderConfig(provider);
+  const config = getProviderConfig(provider, customBaseUrl);
   const resolvedApiKey = apiKey || process.env[config.envKey];
 
   if (!resolvedApiKey) {
@@ -320,6 +323,76 @@ export function getActiveOpenAICompatSessions() {
  */
 export function clearSessionHistory(sessionId) {
   sessionHistories.delete(sessionId);
+}
+
+/**
+ * Test connection to an OpenAI-compatible API
+ * @param {string} provider - Provider name
+ * @param {string} apiKey - API key to test
+ * @param {string} [customBaseUrl] - Optional custom base URL
+ * @returns {Promise<{success: boolean, message: string, models?: string[]}>}
+ */
+export async function testConnection(provider, apiKey, customBaseUrl) {
+  try {
+    const config = getProviderConfig(provider, customBaseUrl);
+    const resolvedApiKey = apiKey || process.env[config.envKey];
+
+    if (!resolvedApiKey) {
+      return { success: false, message: `No API key provided for ${config.name}` };
+    }
+
+    // Try listing models or sending a minimal request
+    const url = `${config.baseUrl}/models`;
+    const headers = {
+      'Authorization': `Bearer ${resolvedApiKey}`,
+      ...config.extraHeaders
+    };
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(url, { headers, signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (response.ok) {
+      const data = await response.json();
+      const modelIds = data.data?.slice(0, 5).map(m => m.id) || [];
+      return {
+        success: true,
+        message: `Connected to ${config.name} successfully`,
+        models: modelIds
+      };
+    }
+
+    // Some providers don't support /models, try a minimal completion
+    if (response.status === 404) {
+      const completionUrl = `${config.baseUrl}/chat/completions`;
+      const completionResponse = await fetch(completionUrl, {
+        method: 'POST',
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: config.defaultModel,
+          messages: [{ role: 'user', content: 'Hi' }],
+          max_tokens: 1
+        })
+      });
+
+      if (completionResponse.ok) {
+        return { success: true, message: `Connected to ${config.name} successfully` };
+      }
+
+      const errorBody = await completionResponse.text();
+      return { success: false, message: `${config.name} error (${completionResponse.status}): ${errorBody.slice(0, 200)}` };
+    }
+
+    const errorText = await response.text();
+    return { success: false, message: `${config.name} error (${response.status}): ${errorText.slice(0, 200)}` };
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      return { success: false, message: `Connection to ${provider} timed out (10s)` };
+    }
+    return { success: false, message: `Connection failed: ${error.message}` };
+  }
 }
 
 /**

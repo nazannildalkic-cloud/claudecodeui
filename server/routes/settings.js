@@ -1,5 +1,6 @@
 import express from 'express';
 import { apiKeysDb, credentialsDb } from '../database/db.js';
+import { testConnection } from '../openai-compat.js';
 
 const router = express.Router();
 
@@ -172,6 +173,26 @@ router.patch('/credentials/:credentialId/toggle', async (req, res) => {
   } catch (error) {
     console.error('Error toggling credential:', error);
     res.status(500).json({ error: 'Failed to toggle credential' });
+  }
+});
+
+// ===============================
+// AI Provider Connection Test
+// ===============================
+
+router.post('/test-provider', async (req, res) => {
+  try {
+    const { provider, apiKey, customBaseUrl } = req.body;
+
+    if (!provider || !['openrouter', 'groq', 'gemini'].includes(provider)) {
+      return res.status(400).json({ error: 'Invalid provider. Must be openrouter, groq, or gemini.' });
+    }
+
+    const result = await testConnection(provider, apiKey, customBaseUrl);
+    res.json(result);
+  } catch (error) {
+    console.error('Error testing provider connection:', error);
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
