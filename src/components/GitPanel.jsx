@@ -33,6 +33,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
   const [isCommitAreaCollapsed, setIsCommitAreaCollapsed] = useState(isMobile); // Collapsed by default on mobile
   const [confirmAction, setConfirmAction] = useState(null); // { type: 'discard|commit|pull|push', file?: string, message?: string }
   const [isCreatingInitialCommit, setIsCreatingInitialCommit] = useState(false);
+  const [operationError, setOperationError] = useState(null); // { type: 'pull'|'push'|'publish', message: string }
   const textareaRef = useRef(null);
   const dropdownRef = useRef(null);
 
@@ -88,6 +89,13 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Auto-dismiss operation error after 5 seconds
+  useEffect(() => {
+    if (!operationError) return;
+    const timer = setTimeout(() => setOperationError(null), 5000);
+    return () => clearTimeout(timer);
+  }, [operationError]);
 
   const fetchGitStatus = async () => {
     if (!selectedProject) return;
@@ -275,7 +283,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
         fetchRemoteStatus();
       } else {
         console.error('Pull failed:', data.error);
-        // TODO: Show user-friendly error message
+        setOperationError({ type: 'pull', message: data.error || 'Pull failed' });
       }
     } catch (error) {
       console.error('Error pulling from remote:', error);
@@ -302,7 +310,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
         fetchRemoteStatus();
       } else {
         console.error('Push failed:', data.error);
-        // TODO: Show user-friendly error message
+        setOperationError({ type: 'push', message: data.error || 'Push failed' });
       }
     } catch (error) {
       console.error('Error pushing to remote:', error);
@@ -330,7 +338,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
         fetchRemoteStatus();
       } else {
         console.error('Publish failed:', data.error);
-        // TODO: Show user-friendly error message
+        setOperationError({ type: 'publish', message: data.error || 'Publish failed' });
       }
     } catch (error) {
       console.error('Error publishing branch:', error);
@@ -971,6 +979,22 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
           </button>
         </div>
       </div>
+
+      {/* Operation Error Banner */}
+      {operationError && (
+        <div className="mx-3 mt-2 px-3 py-2 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-2 text-sm text-red-600 dark:text-red-400">
+          <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+          <span className="flex-1">
+            {operationError.type.charAt(0).toUpperCase() + operationError.type.slice(1)} failed: {operationError.message}
+          </span>
+          <button
+            onClick={() => setOperationError(null)}
+            className="p-0.5 hover:bg-red-500/20 rounded transition-colors"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Git Repository Not Found Message */}
       {gitStatus?.error ? (
