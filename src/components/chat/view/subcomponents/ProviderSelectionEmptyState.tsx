@@ -3,7 +3,7 @@ import { Check, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import SessionProviderLogo from '../../../SessionProviderLogo';
 import NextTaskBanner from '../../../NextTaskBanner.jsx';
-import { CLAUDE_MODELS, CURSOR_MODELS, CODEX_MODELS } from '../../../../../shared/modelConstants';
+import { CLAUDE_MODELS, CURSOR_MODELS, CODEX_MODELS, OPENROUTER_MODELS, GROQ_MODELS, GEMINI_MODELS } from '../../../../../shared/modelConstants';
 import type { ProjectSession, SessionProvider } from '../../../../types/app';
 
 interface ProviderSelectionEmptyStateProps {
@@ -18,6 +18,12 @@ interface ProviderSelectionEmptyStateProps {
   setCursorModel: (model: string) => void;
   codexModel: string;
   setCodexModel: (model: string) => void;
+  openrouterModel: string;
+  setOpenrouterModel: (model: string) => void;
+  groqModel: string;
+  setGroqModel: (model: string) => void;
+  geminiModel: string;
+  setGeminiModel: (model: string) => void;
   tasksEnabled: boolean;
   isTaskMasterInstalled: boolean | null;
   onShowAllTasks?: (() => void) | null;
@@ -58,18 +64,39 @@ const PROVIDERS: ProviderDef[] = [
     ring: 'ring-emerald-600/15',
     check: 'bg-emerald-600 dark:bg-emerald-500 text-white',
   },
+  {
+    id: 'openrouter',
+    name: 'OpenRouter',
+    infoKey: 'providerSelection.providerInfo.openrouter',
+    accent: 'border-indigo-500 dark:border-indigo-400',
+    ring: 'ring-indigo-500/15',
+    check: 'bg-indigo-500 text-white',
+  },
+  {
+    id: 'groq',
+    name: 'Groq',
+    infoKey: 'providerSelection.providerInfo.groq',
+    accent: 'border-orange-500 dark:border-orange-400',
+    ring: 'ring-orange-500/15',
+    check: 'bg-orange-500 text-white',
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    infoKey: 'providerSelection.providerInfo.gemini',
+    accent: 'border-sky-500 dark:border-sky-400',
+    ring: 'ring-sky-500/15',
+    check: 'bg-sky-500 text-white',
+  },
 ];
 
 function getModelConfig(p: SessionProvider) {
   if (p === 'claude') return CLAUDE_MODELS;
   if (p === 'codex') return CODEX_MODELS;
+  if (p === 'openrouter') return OPENROUTER_MODELS;
+  if (p === 'groq') return GROQ_MODELS;
+  if (p === 'gemini') return GEMINI_MODELS;
   return CURSOR_MODELS;
-}
-
-function getModelValue(p: SessionProvider, c: string, cu: string, co: string) {
-  if (p === 'claude') return c;
-  if (p === 'codex') return co;
-  return cu;
 }
 
 export default function ProviderSelectionEmptyState({
@@ -84,6 +111,12 @@ export default function ProviderSelectionEmptyState({
   setCursorModel,
   codexModel,
   setCodexModel,
+  openrouterModel,
+  setOpenrouterModel,
+  groqModel,
+  setGroqModel,
+  geminiModel,
+  setGeminiModel,
   tasksEnabled,
   isTaskMasterInstalled,
   onShowAllTasks,
@@ -99,13 +132,29 @@ export default function ProviderSelectionEmptyState({
   };
 
   const handleModelChange = (value: string) => {
-    if (provider === 'claude') { setClaudeModel(value); localStorage.setItem('claude-model', value); }
-    else if (provider === 'codex') { setCodexModel(value); localStorage.setItem('codex-model', value); }
-    else { setCursorModel(value); localStorage.setItem('cursor-model', value); }
+    const setters: Record<string, [Function, string]> = {
+      claude: [setClaudeModel, 'claude-model'],
+      cursor: [setCursorModel, 'cursor-model'],
+      codex: [setCodexModel, 'codex-model'],
+      openrouter: [setOpenrouterModel, 'openrouter-model'],
+      groq: [setGroqModel, 'groq-model'],
+      gemini: [setGeminiModel, 'gemini-model'],
+    };
+    const [setter, key] = setters[provider] || setters.claude;
+    setter(value);
+    localStorage.setItem(key, value);
   };
 
   const modelConfig = getModelConfig(provider);
-  const currentModel = getModelValue(provider, claudeModel, cursorModel, codexModel);
+  const modelMap: Record<string, string> = {
+    claude: claudeModel,
+    cursor: cursorModel,
+    codex: codexModel,
+    openrouter: openrouterModel,
+    groq: groqModel,
+    gemini: geminiModel,
+  };
+  const currentModel = modelMap[provider] || claudeModel;
 
   /* ── New session — provider picker ── */
   if (!selectedSession && !currentSessionId) {
@@ -123,7 +172,7 @@ export default function ProviderSelectionEmptyState({
           </div>
 
           {/* Provider cards — horizontal row, equal width */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-2.5 mb-6">
+          <div className="grid grid-cols-3 sm:grid-cols-3 gap-2 sm:gap-2.5 mb-6">
             {PROVIDERS.map((p) => {
               const active = provider === p.id;
               return (
@@ -185,7 +234,7 @@ export default function ProviderSelectionEmptyState({
                   ? t('providerSelection.readyPrompt.cursor', { model: cursorModel })
                   : provider === 'codex'
                     ? t('providerSelection.readyPrompt.codex', { model: codexModel })
-                    : t('providerSelection.readyPrompt.default')}
+                    : t('providerSelection.readyPrompt.default', { model: currentModel })}
             </p>
           </div>
 

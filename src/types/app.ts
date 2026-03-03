@@ -1,4 +1,4 @@
-export type SessionProvider = 'claude' | 'cursor' | 'codex';
+export type SessionProvider = 'claude' | 'cursor' | 'codex' | 'openrouter' | 'groq' | 'gemini';
 
 export type AppTab = 'chat' | 'files' | 'shell' | 'git' | 'tasks' | 'preview';
 

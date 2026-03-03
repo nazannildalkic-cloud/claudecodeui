@@ -41,6 +41,9 @@ interface UseChatComposerStateArgs {
   cursorModel: string;
   claudeModel: string;
   codexModel: string;
+  openrouterModel: string;
+  groqModel: string;
+  geminiModel: string;
   isLoading: boolean;
   canAbortSession: boolean;
   tokenBudget: Record<string, unknown> | null;
@@ -92,6 +95,9 @@ export function useChatComposerState({
   cursorModel,
   claudeModel,
   codexModel,
+  openrouterModel,
+  groqModel,
+  geminiModel,
   isLoading,
   canAbortSession,
   tokenBudget,
@@ -287,7 +293,7 @@ export function useChatComposerState({
           projectName: selectedProject.name,
           sessionId: currentSessionId,
           provider,
-          model: provider === 'cursor' ? cursorModel : provider === 'codex' ? codexModel : claudeModel,
+          model: provider === 'cursor' ? cursorModel : provider === 'codex' ? codexModel : provider === 'openrouter' ? openrouterModel : provider === 'groq' ? groqModel : provider === 'gemini' ? geminiModel : claudeModel,
           tokenUsage: tokenBudget,
         };
 
@@ -341,9 +347,12 @@ export function useChatComposerState({
       codexModel,
       currentSessionId,
       cursorModel,
+      geminiModel,
+      groqModel,
       handleBuiltInCommand,
       handleCustomCommand,
       input,
+      openrouterModel,
       provider,
       selectedProject,
       setChatMessages,
@@ -577,6 +586,8 @@ export function useChatComposerState({
               ? 'cursor-tools-settings'
               : provider === 'codex'
               ? 'codex-settings'
+              : provider === 'openrouter' || provider === 'groq' || provider === 'gemini'
+              ? `${provider}-settings`
               : 'claude-settings';
           const savedSettings = safeLocalStorage.getItem(settingsKey);
           if (savedSettings) {
@@ -625,6 +636,26 @@ export function useChatComposerState({
             permissionMode: permissionMode === 'plan' ? 'default' : permissionMode,
           },
         });
+      } else if (provider === 'openrouter' || provider === 'groq' || provider === 'gemini') {
+        const providerModelMap: Record<string, string> = {
+          openrouter: openrouterModel,
+          groq: groqModel,
+          gemini: geminiModel,
+        };
+        const apiKeyStorageKey = `${provider}-api-key`;
+        const storedApiKey = typeof window !== 'undefined' ? localStorage.getItem(apiKeyStorageKey) : null;
+        sendMessage({
+          type: `${provider}-command`,
+          command: messageContent,
+          sessionId: effectiveSessionId,
+          options: {
+            cwd: resolvedProjectPath,
+            projectPath: resolvedProjectPath,
+            sessionId: effectiveSessionId,
+            model: providerModelMap[provider],
+            apiKey: storedApiKey || undefined,
+          },
+        });
       } else {
         sendMessage({
           type: 'claude-command',
@@ -664,8 +695,11 @@ export function useChatComposerState({
       currentSessionId,
       cursorModel,
       executeCommand,
+      geminiModel,
+      groqModel,
       isLoading,
       onSessionActive,
+      openrouterModel,
       pendingViewSessionRef,
       permissionMode,
       provider,

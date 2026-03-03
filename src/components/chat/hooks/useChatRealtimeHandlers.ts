@@ -145,6 +145,12 @@ export function useChatRealtimeHandlers({
       'claude-error',
       'cursor-error',
       'codex-error',
+      'openrouter-complete',
+      'openrouter-error',
+      'groq-complete',
+      'groq-error',
+      'gemini-complete',
+      'gemini-error',
     ]);
 
     const isClaudeSystemInit =
@@ -176,7 +182,10 @@ export function useChatRealtimeHandlers({
       !pendingViewSessionRef.current.sessionId &&
       (latestMessage.type === 'claude-error' ||
         latestMessage.type === 'cursor-error' ||
-        latestMessage.type === 'codex-error');
+        latestMessage.type === 'codex-error' ||
+        latestMessage.type === 'openrouter-error' ||
+        latestMessage.type === 'groq-error' ||
+        latestMessage.type === 'gemini-error');
 
     const handleBackgroundLifecycle = (sessionId?: string) => {
       if (!sessionId) {
@@ -914,6 +923,77 @@ export function useChatRealtimeHandlers({
           {
             type: 'error',
             content: latestMessage.error || 'An error occurred with Codex',
+            timestamp: new Date(),
+          },
+        ]);
+        break;
+
+      // OpenRouter / Groq / Gemini response handling (OpenAI-compatible streaming)
+      case 'openrouter-response':
+      case 'groq-response':
+      case 'gemini-response': {
+        const compatData = latestMessage.data;
+        if (!compatData) break;
+
+        if (compatData.type === 'content_block_delta' && compatData.delta?.text) {
+          const decodedText = decodeHtmlEntities(compatData.delta.text);
+          streamBufferRef.current += decodedText;
+          if (!streamTimerRef.current) {
+            streamTimerRef.current = window.setTimeout(() => {
+              const chunk = streamBufferRef.current;
+              streamBufferRef.current = '';
+              streamTimerRef.current = null;
+              appendStreamingChunk(setChatMessages, chunk, false);
+            }, 50);
+          }
+        }
+        break;
+      }
+
+      case 'openrouter-complete':
+      case 'groq-complete':
+      case 'gemini-complete': {
+        // Flush remaining stream buffer
+        if (streamTimerRef.current) {
+          clearTimeout(streamTimerRef.current);
+          streamTimerRef.current = null;
+        }
+        if (streamBufferRef.current) {
+          appendStreamingChunk(setChatMessages, streamBufferRef.current, false);
+          streamBufferRef.current = '';
+        }
+        finalizeStreamingMessage(setChatMessages);
+
+        clearLoadingIndicators();
+        markSessionsAsCompleted(latestMessage.sessionId, currentSessionId, selectedSession?.id);
+
+        if (selectedProject) {
+          safeLocalStorage.removeItem(`chat_messages_${selectedProject.name}`);
+        }
+        break;
+      }
+
+      case 'openrouter-error':
+      case 'groq-error':
+      case 'gemini-error':
+        // Flush remaining stream buffer
+        if (streamTimerRef.current) {
+          clearTimeout(streamTimerRef.current);
+          streamTimerRef.current = null;
+        }
+        if (streamBufferRef.current) {
+          appendStreamingChunk(setChatMessages, streamBufferRef.current, false);
+          streamBufferRef.current = '';
+        }
+        finalizeStreamingMessage(setChatMessages);
+
+        setIsLoading(false);
+        setCanAbortSession(false);
+        setChatMessages((previous) => [
+          ...previous,
+          {
+            type: 'error',
+            content: latestMessage.error || `An error occurred with the AI provider`,
             timestamp: new Date(),
           },
         ]);

@@ -14,6 +14,18 @@ const agentConfig = {
     name: 'Codex',
     color: 'gray',
   },
+  openrouter: {
+    name: 'OpenRouter',
+    color: 'indigo',
+  },
+  groq: {
+    name: 'Groq',
+    color: 'orange',
+  },
+  gemini: {
+    name: 'Gemini',
+    color: 'sky',
+  },
 };
 
 const colorClasses = {
@@ -34,6 +46,24 @@ const colorClasses = {
     borderBottom: 'border-b-gray-700 dark:border-b-gray-300',
     bg: 'bg-gray-100 dark:bg-gray-800/50',
     dot: 'bg-gray-700 dark:bg-gray-300',
+  },
+  indigo: {
+    border: 'border-l-indigo-500 md:border-l-indigo-500',
+    borderBottom: 'border-b-indigo-500',
+    bg: 'bg-indigo-50 dark:bg-indigo-900/20',
+    dot: 'bg-indigo-500',
+  },
+  orange: {
+    border: 'border-l-orange-500 md:border-l-orange-500',
+    borderBottom: 'border-b-orange-500',
+    bg: 'bg-orange-50 dark:bg-orange-900/20',
+    dot: 'bg-orange-500',
+  },
+  sky: {
+    border: 'border-l-sky-500 md:border-l-sky-500',
+    borderBottom: 'border-b-sky-500',
+    bg: 'bg-sky-50 dark:bg-sky-900/20',
+    dot: 'bg-sky-500',
   },
 };
 

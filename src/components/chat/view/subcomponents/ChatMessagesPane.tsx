@@ -26,6 +26,12 @@ interface ChatMessagesPaneProps {
   setCursorModel: (model: string) => void;
   codexModel: string;
   setCodexModel: (model: string) => void;
+  openrouterModel: string;
+  setOpenrouterModel: (model: string) => void;
+  groqModel: string;
+  setGroqModel: (model: string) => void;
+  geminiModel: string;
+  setGeminiModel: (model: string) => void;
   tasksEnabled: boolean;
   isTaskMasterInstalled: boolean | null;
   onShowAllTasks?: (() => void) | null;
@@ -70,6 +76,12 @@ export default function ChatMessagesPane({
   setCursorModel,
   codexModel,
   setCodexModel,
+  openrouterModel,
+  setOpenrouterModel,
+  groqModel,
+  setGroqModel,
+  geminiModel,
+  setGeminiModel,
   tasksEnabled,
   isTaskMasterInstalled,
   onShowAllTasks,
@@ -152,6 +164,12 @@ export default function ChatMessagesPane({
           setCursorModel={setCursorModel}
           codexModel={codexModel}
           setCodexModel={setCodexModel}
+          openrouterModel={openrouterModel}
+          setOpenrouterModel={setOpenrouterModel}
+          groqModel={groqModel}
+          setGroqModel={setGroqModel}
+          geminiModel={geminiModel}
+          setGeminiModel={setGeminiModel}
           tasksEnabled={tasksEnabled}
           isTaskMasterInstalled={isTaskMasterInstalled}
           onShowAllTasks={onShowAllTasks}

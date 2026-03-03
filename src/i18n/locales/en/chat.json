@@ -153,13 +153,16 @@
     "providerInfo": {
       "anthropic": "by Anthropic",
       "openai": "by OpenAI",
-      "cursorEditor": "AI Code Editor"
+      "cursorEditor": "AI Code Editor",
+      "openrouter": "100+ Models",
+      "groq": "Ultra-Fast AI",
+      "gemini": "by Google"
     },
     "readyPrompt": {
       "claude": "Ready to use Claude with {{model}}. Start typing your message below.",
       "cursor": "Ready to use Cursor with {{model}}. Start typing your message below.",
       "codex": "Ready to use Codex with {{model}}. Start typing your message below.",
-      "default": "Select a provider above to begin"
+      "default": "Ready. Start typing your message below."
     }
   },
   "session": {

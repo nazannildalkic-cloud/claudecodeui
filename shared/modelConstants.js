@@ -65,3 +65,62 @@ export const CODEX_MODELS = {
 
   DEFAULT: 'gpt-5.3-codex'
 };
+
+/**
+ * OpenRouter Models
+ * Access 100+ models via a single API (openrouter.ai)
+ * Prices shown per 1M tokens (input/output)
+ */
+export const OPENROUTER_MODELS = {
+  OPTIONS: [
+    { value: 'deepseek/deepseek-chat-v3-0324', label: 'DeepSeek V3 ($0.14/$0.28)' },
+    { value: 'deepseek/deepseek-reasoner', label: 'DeepSeek R1 ($0.55/$2.19)' },
+    { value: 'google/gemini-2.5-flash-preview', label: 'Gemini 2.5 Flash ($0.15/$0.60)' },
+    { value: 'google/gemini-2.5-pro-preview', label: 'Gemini 2.5 Pro ($1.25/$10)' },
+    { value: 'mistralai/codestral-2501', label: 'Codestral ($0.30/$0.90)' },
+    { value: 'mistralai/mistral-large-2411', label: 'Mistral Large ($2/$6)' },
+    { value: 'meta-llama/llama-4-maverick', label: 'Llama 4 Maverick ($0.20/$0.60)' },
+    { value: 'meta-llama/llama-4-scout', label: 'Llama 4 Scout ($0.15/$0.40)' },
+    { value: 'qwen/qwen-2.5-coder-32b-instruct', label: 'Qwen 2.5 Coder 32B ($0.06/$0.06)' },
+    { value: 'anthropic/claude-sonnet-4', label: 'Claude Sonnet 4 ($3/$15)' }
+  ],
+
+  DEFAULT: 'deepseek/deepseek-chat-v3-0324',
+  BASE_URL: 'https://openrouter.ai/api/v1'
+};
+
+/**
+ * Groq Models
+ * Ultra-fast inference with free tier (groq.com)
+ */
+export const GROQ_MODELS = {
+  OPTIONS: [
+    { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B' },
+    { value: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B Instant' },
+    { value: 'llama3-70b-8192', label: 'Llama 3 70B' },
+    { value: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B' },
+    { value: 'gemma2-9b-it', label: 'Gemma 2 9B' },
+    { value: 'deepseek-r1-distill-llama-70b', label: 'DeepSeek R1 Distill 70B' }
+  ],
+
+  DEFAULT: 'llama-3.3-70b-versatile',
+  BASE_URL: 'https://api.groq.com/openai/v1'
+};
+
+/**
+ * Google Gemini Models
+ * Via Google AI Studio API (aistudio.google.com)
+ */
+export const GEMINI_MODELS = {
+  OPTIONS: [
+    { value: 'gemini-2.5-flash-preview-05-20', label: 'Gemini 2.5 Flash' },
+    { value: 'gemini-2.5-pro-preview-05-06', label: 'Gemini 2.5 Pro' },
+    { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+    { value: 'gemini-2.0-flash-lite', label: 'Gemini 2.0 Flash Lite (Free)' },
+    { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
+    { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' }
+  ],
+
+  DEFAULT: 'gemini-2.5-flash-preview-05-20',
+  BASE_URL: 'https://generativelanguage.googleapis.com/v1beta/openai'
+};

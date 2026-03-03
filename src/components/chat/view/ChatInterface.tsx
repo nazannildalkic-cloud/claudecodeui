@@ -64,6 +64,12 @@ function ChatInterface({
     setClaudeModel,
     codexModel,
     setCodexModel,
+    openrouterModel,
+    setOpenrouterModel,
+    groqModel,
+    setGroqModel,
+    geminiModel,
+    setGeminiModel,
     permissionMode,
     pendingPermissionRequests,
     setPendingPermissionRequests,
@@ -174,6 +180,9 @@ function ChatInterface({
     cursorModel,
     claudeModel,
     codexModel,
+    openrouterModel,
+    groqModel,
+    geminiModel,
     isLoading,
     canAbortSession,
     tokenBudget,
@@ -293,6 +302,12 @@ function ChatInterface({
           setCursorModel={setCursorModel}
           codexModel={codexModel}
           setCodexModel={setCodexModel}
+          openrouterModel={openrouterModel}
+          setOpenrouterModel={setOpenrouterModel}
+          groqModel={groqModel}
+          setGroqModel={setGroqModel}
+          geminiModel={geminiModel}
+          setGeminiModel={setGeminiModel}
           tasksEnabled={tasksEnabled}
           isTaskMasterInstalled={isTaskMasterInstalled}
           onShowAllTasks={onShowAllTasks}

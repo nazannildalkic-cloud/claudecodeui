@@ -14,6 +14,7 @@ import { authenticatedFetch } from '../utils/api';
 // New settings components
 import AgentListItem from './settings/AgentListItem';
 import AccountContent from './settings/AccountContent';
+import ApiKeyAccountContent from './settings/ApiKeyAccountContent';
 import PermissionsContent from './settings/PermissionsContent';
 import McpServersContent from './settings/McpServersContent';
 import LanguageSelector from './LanguageSelector';
@@ -1278,11 +1279,32 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
                       onClick={() => setSelectedAgent('codex')}
                       isMobile={true}
                     />
+                    <AgentListItem
+                      agentId="openrouter"
+                      authStatus={{ authenticated: !!localStorage.getItem('openrouter-api-key') }}
+                      isSelected={selectedAgent === 'openrouter'}
+                      onClick={() => setSelectedAgent('openrouter')}
+                      isMobile={true}
+                    />
+                    <AgentListItem
+                      agentId="groq"
+                      authStatus={{ authenticated: !!localStorage.getItem('groq-api-key') }}
+                      isSelected={selectedAgent === 'groq'}
+                      onClick={() => setSelectedAgent('groq')}
+                      isMobile={true}
+                    />
+                    <AgentListItem
+                      agentId="gemini"
+                      authStatus={{ authenticated: !!localStorage.getItem('gemini-api-key') }}
+                      isSelected={selectedAgent === 'gemini'}
+                      onClick={() => setSelectedAgent('gemini')}
+                      isMobile={true}
+                    />
                   </div>
                 </div>
 
                 {/* Desktop: Sidebar - Agent List */}
-                <div className="hidden md:block w-48 border-r border-gray-200 dark:border-gray-700 flex-shrink-0">
+                <div className="hidden md:block w-48 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-y-auto">
                   <div className="p-2">
                     <AgentListItem
                       agentId="claude"
@@ -1301,6 +1323,26 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
                       authStatus={codexAuthStatus}
                       isSelected={selectedAgent === 'codex'}
                       onClick={() => setSelectedAgent('codex')}
+                    />
+                    <div className="my-2 border-t border-gray-200 dark:border-gray-700" />
+                    <div className="px-3 py-1 text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Budget-friendly</div>
+                    <AgentListItem
+                      agentId="openrouter"
+                      authStatus={{ authenticated: !!localStorage.getItem('openrouter-api-key') }}
+                      isSelected={selectedAgent === 'openrouter'}
+                      onClick={() => setSelectedAgent('openrouter')}
+                    />
+                    <AgentListItem
+                      agentId="groq"
+                      authStatus={{ authenticated: !!localStorage.getItem('groq-api-key') }}
+                      isSelected={selectedAgent === 'groq'}
+                      onClick={() => setSelectedAgent('groq')}
+                    />
+                    <AgentListItem
+                      agentId="gemini"
+                      authStatus={{ authenticated: !!localStorage.getItem('gemini-api-key') }}
+                      isSelected={selectedAgent === 'gemini'}
+                      onClick={() => setSelectedAgent('gemini')}
                     />
                   </div>
                 </div>
@@ -1346,7 +1388,7 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
                   {/* Category Content */}
                   <div className="flex-1 overflow-y-auto p-3 md:p-4">
                     {/* Account Category */}
-                    {selectedCategory === 'account' && (
+                    {selectedCategory === 'account' && ['claude', 'cursor', 'codex'].includes(selectedAgent) && (
                       <AccountContent
                         agent={selectedAgent}
                         authStatus={
@@ -1360,6 +1402,11 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
                           handleCodexLogin
                         }
                       />
+                    )}
+
+                    {/* API Key Account for budget-friendly providers */}
+                    {selectedCategory === 'account' && ['openrouter', 'groq', 'gemini'].includes(selectedAgent) && (
+                      <ApiKeyAccountContent provider={selectedAgent} />
                     )}
 
                     {/* Permissions Category */}

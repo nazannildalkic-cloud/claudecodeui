@@ -46,6 +46,7 @@ import { getProjects, getSessions, getSessionMessages, renameProject, deleteSess
 import { queryClaudeSDK, abortClaudeSDKSession, isClaudeSDKSessionActive, getActiveClaudeSDKSessions, resolveToolApproval } from './claude-sdk.js';
 import { spawnCursor, abortCursorSession, isCursorSessionActive, getActiveCursorSessions } from './cursor-cli.js';
 import { queryCodex, abortCodexSession, isCodexSessionActive, getActiveCodexSessions } from './openai-codex.js';
+import { queryOpenAICompat, abortOpenAICompatSession, isOpenAICompatSessionActive } from './openai-compat.js';
 import gitRoutes from './routes/git.js';
 import authRoutes from './routes/auth.js';
 import mcpRoutes from './routes/mcp.js';
@@ -949,6 +950,15 @@ function handleChatConnection(ws) {
                 console.log('🔄 Session:', data.options?.sessionId ? 'Resume' : 'New');
                 console.log('🤖 Model:', data.options?.model || 'default');
                 await queryCodex(data.command, data.options, writer);
+            } else if (data.type === 'openrouter-command' || data.type === 'groq-command' || data.type === 'gemini-command') {
+                const provider = data.type.replace('-command', '');
+                console.log(`[DEBUG] ${provider} message:`, data.command || '[Continue/Resume]');
+                console.log('📁 Project:', data.options?.projectPath || data.options?.cwd || 'Unknown');
+                console.log('🤖 Model:', data.options?.model || 'default');
+                await queryOpenAICompat(data.command, {
+                    ...data.options,
+                    provider
+                }, writer);
             } else if (data.type === 'cursor-resume') {
                 // Backward compatibility: treat as cursor-command with resume and no prompt
                 console.log('[DEBUG] Cursor resume session (compat):', data.sessionId);
@@ -966,6 +976,8 @@ function handleChatConnection(ws) {
                     success = abortCursorSession(data.sessionId);
                 } else if (provider === 'codex') {
                     success = abortCodexSession(data.sessionId);
+                } else if (provider === 'openrouter' || provider === 'groq' || provider === 'gemini') {
+                    success = abortOpenAICompatSession(data.sessionId);
                 } else {
                     // Use Claude Agents SDK
                     success = await abortClaudeSDKSession(data.sessionId);
@@ -1008,6 +1020,8 @@ function handleChatConnection(ws) {
                     isActive = isCursorSessionActive(sessionId);
                 } else if (provider === 'codex') {
                     isActive = isCodexSessionActive(sessionId);
+                } else if (provider === 'openrouter' || provider === 'groq' || provider === 'gemini') {
+                    isActive = isOpenAICompatSessionActive(sessionId);
                 } else {
                     // Use Claude Agents SDK
                     isActive = isClaudeSDKSessionActive(sessionId);

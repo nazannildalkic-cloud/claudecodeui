@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { authenticatedFetch } from '../../../utils/api';
-import { CLAUDE_MODELS, CODEX_MODELS, CURSOR_MODELS } from '../../../../shared/modelConstants';
+import { CLAUDE_MODELS, CODEX_MODELS, CURSOR_MODELS, OPENROUTER_MODELS, GROQ_MODELS, GEMINI_MODELS } from '../../../../shared/modelConstants';
 import type { PendingPermissionRequest, PermissionMode, Provider } from '../types/types';
 import type { ProjectSession, SessionProvider } from '../../../types/app';
 
@@ -22,6 +22,15 @@ export function useChatProviderState({ selectedSession }: UseChatProviderStateAr
   });
   const [codexModel, setCodexModel] = useState<string>(() => {
     return localStorage.getItem('codex-model') || CODEX_MODELS.DEFAULT;
+  });
+  const [openrouterModel, setOpenrouterModel] = useState<string>(() => {
+    return localStorage.getItem('openrouter-model') || OPENROUTER_MODELS.DEFAULT;
+  });
+  const [groqModel, setGroqModel] = useState<string>(() => {
+    return localStorage.getItem('groq-model') || GROQ_MODELS.DEFAULT;
+  });
+  const [geminiModel, setGeminiModel] = useState<string>(() => {
+    return localStorage.getItem('gemini-model') || GEMINI_MODELS.DEFAULT;
   });
 
   const lastProviderRef = useRef(provider);
@@ -81,8 +90,9 @@ export function useChatProviderState({ selectedSession }: UseChatProviderStateAr
   }, [provider]);
 
   const cyclePermissionMode = useCallback(() => {
+    const noPermissionProviders = ['codex', 'openrouter', 'groq', 'gemini'];
     const modes: PermissionMode[] =
-      provider === 'codex'
+      noPermissionProviders.includes(provider)
         ? ['default', 'acceptEdits', 'bypassPermissions']
         : ['default', 'acceptEdits', 'bypassPermissions', 'plan'];
 
@@ -105,6 +115,12 @@ export function useChatProviderState({ selectedSession }: UseChatProviderStateAr
     setClaudeModel,
     codexModel,
     setCodexModel,
+    openrouterModel,
+    setOpenrouterModel,
+    groqModel,
+    setGroqModel,
+    geminiModel,
+    setGeminiModel,
     permissionMode,
     setPermissionMode,
     pendingPermissionRequests,
