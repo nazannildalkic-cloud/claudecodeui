@@ -24,10 +24,10 @@ const ICON_SIZE = 'w-4 h-4 flex-shrink-0';
 
 const FILE_ICON_MAP = {
   // ── JavaScript / TypeScript ──
-  js:   { icon: FileCode,   color: 'text-yellow-500' },
-  jsx:  { icon: FileCode,   color: 'text-yellow-500' },
-  mjs:  { icon: FileCode,   color: 'text-yellow-500' },
-  cjs:  { icon: FileCode,   color: 'text-yellow-500' },
+  js:   { icon: FileCode,   color: 'text-warm' },
+  jsx:  { icon: FileCode,   color: 'text-warm' },
+  mjs:  { icon: FileCode,   color: 'text-warm' },
+  cjs:  { icon: FileCode,   color: 'text-warm' },
   ts:   { icon: FileCode2,  color: 'text-blue-500' },
   tsx:  { icon: FileCode2,  color: 'text-blue-500' },
   mts:  { icon: FileCode2,  color: 'text-blue-500' },
@@ -36,10 +36,10 @@ const FILE_ICON_MAP = {
   py:   { icon: Code2,      color: 'text-emerald-500' },
   pyw:  { icon: Code2,      color: 'text-emerald-500' },
   pyi:  { icon: Code2,      color: 'text-emerald-400' },
-  ipynb:{ icon: NotebookPen, color: 'text-orange-500' },
+  ipynb:{ icon: NotebookPen, color: 'text-warm' },
 
   // ── Rust ──
-  rs:   { icon: Cog,        color: 'text-orange-600' },
+  rs:   { icon: Cog,        color: 'text-warm' },
   toml: { icon: Settings,   color: 'text-gray-500' },
 
   // ── Go ──
@@ -69,7 +69,7 @@ const FILE_ICON_MAP = {
   cs:   { icon: Hexagon,    color: 'text-purple-600' },
 
   // ── Swift ──
-  swift:{ icon: Flame,      color: 'text-orange-500' },
+  swift:{ icon: Flame,      color: 'text-warm' },
 
   // ── Lua ──
   lua:  { icon: SquareFunction, color: 'text-blue-500' },
@@ -78,29 +78,29 @@ const FILE_ICON_MAP = {
   r:    { icon: FlaskConical, color: 'text-blue-600' },
 
   // ── Web ──
-  html: { icon: Globe,      color: 'text-orange-600' },
-  htm:  { icon: Globe,      color: 'text-orange-600' },
+  html: { icon: Globe,      color: 'text-warm' },
+  htm:  { icon: Globe,      color: 'text-warm' },
   css:  { icon: Hash,       color: 'text-blue-500' },
   scss: { icon: Hash,       color: 'text-pink-500' },
   sass: { icon: Hash,       color: 'text-pink-400' },
   less: { icon: Hash,       color: 'text-indigo-500' },
   vue:  { icon: FileCode2,  color: 'text-emerald-500' },
-  svelte:{ icon: FileCode2, color: 'text-orange-500' },
+  svelte:{ icon: FileCode2, color: 'text-warm' },
 
   // ── Data / Config ──
-  json: { icon: Braces,     color: 'text-yellow-600' },
-  jsonc:{ icon: Braces,     color: 'text-yellow-500' },
-  json5:{ icon: Braces,     color: 'text-yellow-500' },
+  json: { icon: Braces,     color: 'text-warm' },
+  jsonc:{ icon: Braces,     color: 'text-warm' },
+  json5:{ icon: Braces,     color: 'text-warm' },
   yaml: { icon: Settings,   color: 'text-purple-400' },
   yml:  { icon: Settings,   color: 'text-purple-400' },
-  xml:  { icon: FileCode,   color: 'text-orange-500' },
+  xml:  { icon: FileCode,   color: 'text-warm' },
   csv:  { icon: FileSpreadsheet, color: 'text-green-600' },
   tsv:  { icon: FileSpreadsheet, color: 'text-green-500' },
   sql:  { icon: Database,   color: 'text-blue-500' },
   graphql:{ icon: Workflow,  color: 'text-pink-500' },
   gql:  { icon: Workflow,   color: 'text-pink-500' },
   proto:{ icon: Box,        color: 'text-green-500' },
-  env:  { icon: Shield,     color: 'text-yellow-600' },
+  env:  { icon: Shield,     color: 'text-warm' },
 
   // ── Documents ──
   md:   { icon: BookOpen,   color: 'text-blue-500' },
@@ -131,7 +131,7 @@ const FILE_ICON_MAP = {
   ico:  { icon: Image,      color: 'text-purple-400' },
   bmp:  { icon: Image,      color: 'text-purple-400' },
   tiff: { icon: Image,      color: 'text-purple-400' },
-  svg:  { icon: Palette,    color: 'text-amber-500' },
+  svg:  { icon: Palette,    color: 'text-warm' },
 
   // ── Audio ──
   mp3:  { icon: Music2,     color: 'text-pink-500' },
@@ -156,12 +156,12 @@ const FILE_ICON_MAP = {
   eot:  { icon: FileType,   color: 'text-red-400' },
 
   // ── Archives ──
-  zip:  { icon: Archive,    color: 'text-amber-600' },
-  tar:  { icon: Archive,    color: 'text-amber-600' },
-  gz:   { icon: Archive,    color: 'text-amber-600' },
-  bz2:  { icon: Archive,    color: 'text-amber-600' },
-  rar:  { icon: Archive,    color: 'text-amber-500' },
-  '7z': { icon: Archive,    color: 'text-amber-500' },
+  zip:  { icon: Archive,    color: 'text-warm' },
+  tar:  { icon: Archive,    color: 'text-warm' },
+  gz:   { icon: Archive,    color: 'text-warm' },
+  bz2:  { icon: Archive,    color: 'text-warm' },
+  rar:  { icon: Archive,    color: 'text-warm' },
+  '7z': { icon: Archive,    color: 'text-warm' },
 
   // ── Lock files ──
   lock: { icon: Lock,       color: 'text-gray-500' },
@@ -200,32 +200,32 @@ const FILENAME_ICON_MAP = {
   '.eslintrc.cjs':    { icon: Settings,  color: 'text-violet-500' },
   'eslint.config.js': { icon: Settings,  color: 'text-violet-500' },
   'eslint.config.mjs':{ icon: Settings,  color: 'text-violet-500' },
-  '.env':             { icon: Shield,    color: 'text-yellow-600' },
-  '.env.local':       { icon: Shield,    color: 'text-yellow-600' },
-  '.env.development': { icon: Shield,    color: 'text-yellow-500' },
-  '.env.production':  { icon: Shield,    color: 'text-yellow-600' },
-  '.env.example':     { icon: Shield,    color: 'text-yellow-400' },
+  '.env':             { icon: Shield,    color: 'text-warm' },
+  '.env.local':       { icon: Shield,    color: 'text-warm' },
+  '.env.development': { icon: Shield,    color: 'text-warm' },
+  '.env.production':  { icon: Shield,    color: 'text-warm' },
+  '.env.example':     { icon: Shield,    color: 'text-warm' },
   'package.json':     { icon: Braces,    color: 'text-green-500' },
   'package-lock.json':{ icon: Lock,      color: 'text-gray-500' },
   'yarn.lock':        { icon: Lock,      color: 'text-blue-400' },
-  'pnpm-lock.yaml':   { icon: Lock,      color: 'text-orange-400' },
+  'pnpm-lock.yaml':   { icon: Lock,      color: 'text-warm' },
   'bun.lockb':        { icon: Lock,      color: 'text-gray-400' },
-  'Cargo.toml':       { icon: Cog,       color: 'text-orange-600' },
-  'Cargo.lock':       { icon: Lock,      color: 'text-orange-400' },
+  'Cargo.toml':       { icon: Cog,       color: 'text-warm' },
+  'Cargo.lock':       { icon: Lock,      color: 'text-warm' },
   'Gemfile':          { icon: Gem,       color: 'text-red-500' },
   'Gemfile.lock':     { icon: Lock,      color: 'text-red-400' },
   'Makefile':         { icon: Terminal,   color: 'text-gray-500' },
   'CMakeLists.txt':   { icon: Cog,       color: 'text-blue-500' },
   'tsconfig.json':    { icon: Braces,    color: 'text-blue-500' },
-  'jsconfig.json':    { icon: Braces,    color: 'text-yellow-500' },
+  'jsconfig.json':    { icon: Braces,    color: 'text-warm' },
   'vite.config.ts':   { icon: Flame,     color: 'text-purple-500' },
   'vite.config.js':   { icon: Flame,     color: 'text-purple-500' },
   'webpack.config.js':{ icon: Cog,       color: 'text-blue-500' },
   'tailwind.config.js':{ icon: Hash,     color: 'text-cyan-500' },
   'tailwind.config.ts':{ icon: Hash,     color: 'text-cyan-500' },
   'postcss.config.js':{ icon: Cog,       color: 'text-red-400' },
-  'babel.config.js':  { icon: Settings,  color: 'text-yellow-500' },
-  '.babelrc':         { icon: Settings,  color: 'text-yellow-500' },
+  'babel.config.js':  { icon: Settings,  color: 'text-warm' },
+  '.babelrc':         { icon: Settings,  color: 'text-warm' },
   'README.md':        { icon: BookOpen,  color: 'text-blue-500' },
   'LICENSE':          { icon: FileCheck,  color: 'text-gray-500' },
   'LICENSE.md':       { icon: FileCheck,  color: 'text-gray-500' },
@@ -243,7 +243,7 @@ function getFileIconData(filename) {
 
   // 2. Check for .env prefix pattern
   if (filename.startsWith('.env')) {
-    return { icon: Shield, color: 'text-yellow-600' };
+    return { icon: Shield, color: 'text-warm' };
   }
 
   // 3. Extension-based lookup

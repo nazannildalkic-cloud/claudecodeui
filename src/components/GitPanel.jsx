@@ -752,7 +752,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
               )}
               <span
                 className={`inline-flex items-center justify-center w-5 h-5 rounded text-[10px] font-bold border ${
-                  status === 'M' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50' :
+                  status === 'M' ? 'bg-warm/10 text-warm dark:bg-warm/10 dark:text-warm border-warm/30 dark:border-warm/30' :
                   status === 'A' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 border-green-200 dark:border-green-800/50' :
                   status === 'D' ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 border-red-200 dark:border-red-800/50' :
                   'bg-muted text-muted-foreground border-border'
@@ -774,7 +774,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
               <div className="flex items-center gap-2">
                 <span
                   className={`inline-flex items-center justify-center w-5 h-5 rounded text-[10px] font-bold border ${
-                    status === 'M' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50' :
+                    status === 'M' ? 'bg-warm/10 text-warm dark:bg-warm/10 dark:text-warm border-warm/30 dark:border-warm/30' :
                     status === 'A' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 border-green-200 dark:border-green-800/50' :
                     status === 'D' ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 border-red-200 dark:border-red-800/50' :
                     'bg-muted text-muted-foreground border-border'
@@ -933,7 +933,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
                         message: `Push ${remoteStatus.ahead} commit${remoteStatus.ahead !== 1 ? 's' : ''} to ${remoteStatus.remoteName}?`
                       })}
                       disabled={isPushing}
-                      className="px-2.5 py-1 text-sm bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:opacity-50 flex items-center gap-1 transition-colors"
+                      className="px-2.5 py-1 text-sm bg-warm text-warm-foreground rounded-lg hover:bg-warm/90 disabled:opacity-50 flex items-center gap-1 transition-colors"
                       title={`Push ${remoteStatus.ahead} commit${remoteStatus.ahead !== 1 ? 's' : ''} to ${remoteStatus.remoteName}`}
                     >
                       <Upload className={`w-3 h-3 ${isPushing ? 'animate-pulse' : ''}`} />
@@ -1172,7 +1172,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
                 <div className="px-4 py-3 bg-muted/30 text-sm">
                   <div className={`${isMobile ? 'grid grid-cols-2 gap-3 justify-items-center' : 'flex justify-center gap-6'}`}>
                     <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center justify-center w-5 h-5 bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300 rounded border border-yellow-200 dark:border-yellow-800/50 font-bold text-[10px]">
+                      <span className="inline-flex items-center justify-center w-5 h-5 bg-warm/10 text-warm dark:bg-warm/10 dark:text-warm rounded border border-warm/30 dark:border-warm/30 font-bold text-[10px]">
                         M
                       </span>
                       <span className="text-muted-foreground italic">Modified</span>
@@ -1342,10 +1342,10 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className={`p-2 rounded-full mr-3 ${
-                  (confirmAction.type === 'discard' || confirmAction.type === 'delete') ? 'bg-red-100 dark:bg-red-900/30' : 'bg-yellow-100 dark:bg-yellow-900/30'
+                  (confirmAction.type === 'discard' || confirmAction.type === 'delete') ? 'bg-red-100 dark:bg-red-900/30' : 'bg-warm/10 dark:bg-warm/10'
                 }`}>
                   <AlertTriangle className={`w-5 h-5 ${
-                    (confirmAction.type === 'discard' || confirmAction.type === 'delete') ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'
+                    (confirmAction.type === 'discard' || confirmAction.type === 'delete') ? 'text-red-600 dark:text-red-400' : 'text-warm dark:text-warm'
                   }`} />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">
@@ -1379,7 +1379,7 @@ function GitPanel({ selectedProject, isMobile, onFileOpen }) {
                       ? 'bg-green-600 hover:bg-green-700'
                       : confirmAction.type === 'publish'
                       ? 'bg-purple-600 hover:bg-purple-700'
-                      : 'bg-orange-600 hover:bg-orange-700'
+                      : 'bg-warm hover:bg-warm/90'
                   } flex items-center space-x-2`}
                 >
                   {confirmAction.type === 'discard' ? (

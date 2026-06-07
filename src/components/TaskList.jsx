@@ -177,8 +177,8 @@ const TaskList = ({
         id: 'deferred',
         title: t('kanban.deferred'),
         status: 'deferred',
-        color: 'bg-amber-50 dark:bg-amber-900/50 border-amber-200 dark:border-amber-700',
-        headerColor: 'bg-amber-100 dark:bg-amber-800 text-amber-800 dark:text-amber-200'
+        color: 'bg-warm/10 dark:bg-warm/10 border-warm/30 dark:border-warm/30',
+        headerColor: 'bg-warm/10 dark:bg-warm/10 text-warm dark:text-warm'
       },
       {
         id: 'cancelled',
@@ -962,12 +962,12 @@ const TaskList = ({
                 </div>
 
                 {/* Step 3 */}
-                <div className="flex gap-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/50 rounded-lg border border-amber-200 dark:border-amber-800">
-                  <div className="flex-shrink-0 w-8 h-8 bg-amber-600 text-white text-sm font-semibold rounded-full flex items-center justify-center">3</div>
+                <div className="flex gap-4 p-4 bg-gradient-to-r from-warm/10 to-warm/10 dark:from-warm/10 dark:to-warm/10 rounded-lg border border-warm/30 dark:border-warm/30">
+                  <div className="flex-shrink-0 w-8 h-8 bg-warm text-warm-foreground text-sm font-semibold rounded-full flex items-center justify-center">3</div>
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('gettingStarted.steps.analyzeTasks.title')}</h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{t('gettingStarted.steps.analyzeTasks.description')}</p>
-                    <div className="bg-white dark:bg-gray-800/50 rounded border border-amber-200 dark:border-amber-700/50 p-3 mb-2">
+                    <div className="bg-white dark:bg-gray-800/50 rounded border border-warm/30 dark:border-warm/30 p-3 mb-2">
                       <p className="text-xs text-gray-900 dark:text-white font-mono whitespace-pre-wrap">
                         {t('helpGuide.examples.expandTask')}
                       </p>
@@ -1014,7 +1014,7 @@ const TaskList = ({
                       {t('helpGuide.proTips.filters')}
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span className="w-1.5 h-1.5 bg-warm rounded-full mt-2 flex-shrink-0"></span>
                       {t('helpGuide.proTips.details')}
                     </li>
                   </ul>

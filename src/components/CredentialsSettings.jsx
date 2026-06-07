@@ -161,8 +161,8 @@ function CredentialsSettings() {
     <div className="space-y-8">
       {/* New API Key Alert */}
       {newlyCreatedKey && (
-        <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-          <h4 className="font-semibold text-yellow-500 mb-2">{t('apiKeys.newKey.alertTitle')}</h4>
+        <div className="p-4 bg-warm/10 border border-warm/30 rounded-lg">
+          <h4 className="font-semibold text-warm mb-2">{t('apiKeys.newKey.alertTitle')}</h4>
           <p className="text-sm text-muted-foreground mb-3">
             {t('apiKeys.newKey.alertMessage')}
           </p>

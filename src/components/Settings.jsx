@@ -1054,7 +1054,7 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
               {isDarkMode ? (
                 <Moon className="w-3.5 h-3.5 text-gray-700" />
               ) : (
-                <Sun className="w-3.5 h-3.5 text-yellow-500" />
+                <Sun className="w-3.5 h-3.5 text-warm" />
               )}
             </span>
           </button>
@@ -1122,7 +1122,7 @@ function Settings({ isOpen, onClose, projects = [], initialTab = 'agents' }) {
               {codeEditorTheme === 'dark' ? (
                 <Moon className="w-3.5 h-3.5 text-gray-700" />
               ) : (
-                <Sun className="w-3.5 h-3.5 text-yellow-500" />
+                <Sun className="w-3.5 h-3.5 text-warm" />
               )}
             </span>
           </button>

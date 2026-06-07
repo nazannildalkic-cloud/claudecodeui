@@ -345,8 +345,8 @@ const TaskMasterSetupWizard = ({
                   </>
                 ) : (
                   <>
-                    <AlertCircle className="w-4 h-4 text-amber-500" />
-                    <span className="text-sm text-amber-700 dark:text-amber-300">MCP server not detected (optional)</span>
+                    <AlertCircle className="w-4 h-4 text-warm" />
+                    <span className="text-sm text-warm dark:text-warm">MCP server not detected (optional)</span>
                   </>
                 )}
               </div>
