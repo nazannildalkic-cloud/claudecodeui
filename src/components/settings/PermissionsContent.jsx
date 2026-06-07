@@ -78,12 +78,12 @@ function ClaudePermissions({
       {/* Skip Permissions */}
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <AlertTriangle className="w-5 h-5 text-orange-500" />
+          <AlertTriangle className="w-5 h-5 text-warm" />
           <h3 className="text-lg font-medium text-foreground">
             {t('permissions.title')}
           </h3>
         </div>
-        <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+        <div className="bg-warm/10 dark:bg-warm/10 border border-warm/30 dark:border-warm/30 rounded-lg p-4">
           <label className="flex items-center gap-3">
             <input
               type="checkbox"
@@ -92,10 +92,10 @@ function ClaudePermissions({
               className="w-4 h-4 text-blue-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
             />
             <div>
-              <div className="font-medium text-orange-900 dark:text-orange-100">
+              <div className="font-medium text-warm dark:text-warm">
                 {t('permissions.skipPermissions.label')}
               </div>
-              <div className="text-sm text-orange-700 dark:text-orange-300">
+              <div className="text-sm text-warm dark:text-warm">
                 {t('permissions.skipPermissions.claudeDescription')}
               </div>
             </div>
@@ -301,12 +301,12 @@ function CursorPermissions({
       {/* Skip Permissions */}
       <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <AlertTriangle className="w-5 h-5 text-orange-500" />
+          <AlertTriangle className="w-5 h-5 text-warm" />
           <h3 className="text-lg font-medium text-foreground">
             {t('permissions.title')}
           </h3>
         </div>
-        <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+        <div className="bg-warm/10 dark:bg-warm/10 border border-warm/30 dark:border-warm/30 rounded-lg p-4">
           <label className="flex items-center gap-3">
             <input
               type="checkbox"
@@ -315,10 +315,10 @@ function CursorPermissions({
               className="w-4 h-4 text-purple-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
             />
             <div>
-              <div className="font-medium text-orange-900 dark:text-orange-100">
+              <div className="font-medium text-warm dark:text-warm">
                 {t('permissions.skipPermissions.label')}
               </div>
-              <div className="text-sm text-orange-700 dark:text-orange-300">
+              <div className="text-sm text-warm dark:text-warm">
                 {t('permissions.skipPermissions.cursorDescription')}
               </div>
             </div>
@@ -555,7 +555,7 @@ function CodexPermissions({ permissionMode, setPermissionMode }) {
         <div
           className={`border rounded-lg p-4 cursor-pointer transition-all ${
             permissionMode === 'bypassPermissions'
-              ? 'bg-orange-50 dark:bg-orange-900/20 border-orange-400 dark:border-orange-600'
+              ? 'bg-warm/10 dark:bg-warm/10 border-warm/30 dark:border-warm/30'
               : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
           }`}
           onClick={() => setPermissionMode('bypassPermissions')}
@@ -566,14 +566,14 @@ function CodexPermissions({ permissionMode, setPermissionMode }) {
               name="codexPermissionMode"
               checked={permissionMode === 'bypassPermissions'}
               onChange={() => setPermissionMode('bypassPermissions')}
-              className="mt-1 w-4 h-4 text-orange-600"
+              className="mt-1 w-4 h-4 text-warm"
             />
             <div>
-              <div className="font-medium text-orange-900 dark:text-orange-100 flex items-center gap-2">
+              <div className="font-medium text-warm dark:text-warm flex items-center gap-2">
                 {t('permissions.codex.modes.bypassPermissions.title')}
                 <AlertTriangle className="w-4 h-4" />
               </div>
-              <div className="text-sm text-orange-700 dark:text-orange-300">
+              <div className="text-sm text-warm dark:text-warm">
                 {t('permissions.codex.modes.bypassPermissions.description')}
               </div>
             </div>

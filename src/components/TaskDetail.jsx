@@ -89,7 +89,7 @@ const TaskDetail = ({
       case 'in-progress':
         return { icon: Clock, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-950' };
       case 'review':
-        return { icon: AlertCircle, color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-950' };
+        return { icon: AlertCircle, color: 'text-warm dark:text-warm', bg: 'bg-warm/10 dark:bg-warm/10' };
       case 'deferred':
         return { icon: Pause, color: 'text-gray-500 dark:text-gray-400', bg: 'bg-gray-50 dark:bg-gray-800' };
       case 'cancelled':
@@ -106,7 +106,7 @@ const TaskDetail = ({
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high': return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950';
-      case 'medium': return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-950';
+      case 'medium': return 'text-warm dark:text-warm bg-warm/10 dark:bg-warm/10';
       case 'low': return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950';
       default: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800';
     }

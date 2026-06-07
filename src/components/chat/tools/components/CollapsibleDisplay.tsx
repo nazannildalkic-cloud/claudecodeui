@@ -16,7 +16,7 @@ interface CollapsibleDisplayProps {
 }
 
 const borderColorMap: Record<string, string> = {
-  edit: 'border-l-amber-500 dark:border-l-amber-400',
+  edit: 'border-l-warm dark:border-l-warm',
   search: 'border-l-gray-400 dark:border-l-gray-500',
   bash: 'border-l-green-500 dark:border-l-green-400',
   todo: 'border-l-violet-500 dark:border-l-violet-400',

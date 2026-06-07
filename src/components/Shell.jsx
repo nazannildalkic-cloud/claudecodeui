@@ -599,7 +599,7 @@ function Shell({ selectedProject, selectedSession, initialCommand, isPlainShell 
               <span className="text-xs text-gray-400">{t('shell.status.newSession')}</span>
             )}
             {!isInitialized && (
-              <span className="text-xs text-yellow-400">{t('shell.status.initializing')}</span>
+              <span className="text-xs text-warm">{t('shell.status.initializing')}</span>
             )}
             {isRestarting && (
               <span className="text-xs text-blue-400">{t('shell.status.restarting')}</span>
@@ -671,8 +671,8 @@ function Shell({ selectedProject, selectedSession, initialCommand, isPlainShell 
         {isConnecting && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 p-4">
             <div className="text-center max-w-sm w-full">
-              <div className="flex items-center justify-center space-x-3 text-yellow-400">
-                <div className="w-6 h-6 animate-spin rounded-full border-2 border-yellow-400 border-t-transparent"></div>
+              <div className="flex items-center justify-center space-x-3 text-warm">
+                <div className="w-6 h-6 animate-spin rounded-full border-2 border-warm/30 border-t-transparent"></div>
                 <span className="text-base font-medium">{t('shell.connecting')}</span>
               </div>
               <p className="text-gray-400 text-sm mt-3 px-2">

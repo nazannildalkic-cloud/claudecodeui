@@ -34,10 +34,10 @@ const TaskCard = ({
       case 'review':
         return {
           icon: AlertCircle,
-          bgColor: 'bg-amber-50 dark:bg-amber-950',
-          borderColor: 'border-amber-200 dark:border-amber-800',
-          iconColor: 'text-amber-600 dark:text-amber-400',
-          textColor: 'text-amber-900 dark:text-amber-100',
+          bgColor: 'bg-warm/10 dark:bg-warm/10',
+          borderColor: 'border-warm/30 dark:border-warm/30',
+          iconColor: 'text-warm dark:text-warm',
+          textColor: 'text-warm dark:text-warm',
           statusText: 'Review'
         };
       
@@ -90,8 +90,8 @@ const TaskCard = ({
       case 'medium':
         return (
           <Tooltip content="Medium Priority">
-            <div className="w-4 h-4 bg-amber-100 dark:bg-amber-900/30 rounded flex items-center justify-center">
-              <Minus className="w-2.5 h-2.5 text-amber-600 dark:text-amber-400" />
+            <div className="w-4 h-4 bg-warm/10 dark:bg-warm/10 rounded flex items-center justify-center">
+              <Minus className="w-2.5 h-2.5 text-warm dark:text-warm" />
             </div>
           </Tooltip>
         );
@@ -158,7 +158,7 @@ const TaskCard = ({
         <div className="flex items-center">
           {task.dependencies && Array.isArray(task.dependencies) && task.dependencies.length > 0 && (
             <Tooltip content={`Depends on: ${task.dependencies.map(dep => `Task ${dep}`).join(', ')}`}>
-              <div className="flex items-center gap-1 text-xs text-amber-600 dark:text-amber-400">
+              <div className="flex items-center gap-1 text-xs text-warm dark:text-warm">
                 <ArrowRight className="w-3 h-3" />
                 <span>Depends on: {task.dependencies.join(', ')}</span>
               </div>

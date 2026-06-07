@@ -48,7 +48,7 @@ export default function ChatInputControls({
             : permissionMode === 'acceptEdits'
               ? 'bg-green-50 dark:bg-green-900/15 text-green-700 dark:text-green-300 border-green-300/60 dark:border-green-600/40 hover:bg-green-100 dark:hover:bg-green-900/25'
               : permissionMode === 'bypassPermissions'
-                ? 'bg-orange-50 dark:bg-orange-900/15 text-orange-700 dark:text-orange-300 border-orange-300/60 dark:border-orange-600/40 hover:bg-orange-100 dark:hover:bg-orange-900/25'
+                ? 'bg-warm/10 dark:bg-warm/10 text-warm dark:text-warm border-warm/30 dark:border-warm/30 hover:bg-warm/10 dark:hover:bg-warm/10'
                 : 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10'
         }`}
         title={t('input.clickToChangeMode')}
@@ -61,7 +61,7 @@ export default function ChatInputControls({
                 : permissionMode === 'acceptEdits'
                   ? 'bg-green-500'
                   : permissionMode === 'bypassPermissions'
-                    ? 'bg-orange-500'
+                    ? 'bg-warm'
                     : 'bg-primary'
             }`}
           />

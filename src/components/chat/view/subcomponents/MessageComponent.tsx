@@ -131,7 +131,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
         /* Compact task notification on the left */
         <div className="w-full">
           <div className="flex items-center gap-2 py-0.5">
-            <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${message.taskStatus === 'completed' ? 'bg-green-400 dark:bg-green-500' : 'bg-amber-400 dark:bg-amber-500'}`} />
+            <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${message.taskStatus === 'completed' ? 'bg-green-400 dark:bg-green-500' : 'bg-warm/20 dark:bg-warm'}`} />
             <span className="text-xs text-gray-500 dark:text-gray-400">{message.content}</span>
           </div>
         </div>
@@ -279,15 +279,15 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
               </>
             ) : message.isInteractivePrompt ? (
               // Special handling for interactive prompts
-              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+              <div className="bg-warm/10 dark:bg-warm/10 border border-warm/30 dark:border-warm/30 rounded-lg p-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-8 h-8 bg-warm rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-amber-900 dark:text-amber-100 text-base mb-3">
+                    <h4 className="font-semibold text-warm dark:text-warm text-base mb-3">
                       {t('interactive.title')}
                     </h4>
                     {(() => {
@@ -311,7 +311,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                       
                       return (
                         <>
-                          <p className="text-sm text-amber-800 dark:text-amber-200 mb-4">
+                          <p className="text-sm text-warm dark:text-warm mb-4">
                             {questionLine}
                           </p>
                           
@@ -322,8 +322,8 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                 key={option.number}
                                 className={`w-full text-left px-4 py-3 rounded-lg border-2 transition-all ${
                                   option.isSelected
-                                    ? 'bg-amber-600 dark:bg-amber-700 text-white border-amber-600 dark:border-amber-700 shadow-md'
-                                    : 'bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700'
+                                    ? 'bg-warm dark:bg-warm text-warm-foreground border-warm/30 dark:border-warm/30 shadow-md'
+                                    : 'bg-white dark:bg-gray-800 text-warm dark:text-warm border-warm/30 dark:border-warm/30'
                                 } cursor-not-allowed opacity-75`}
                                 disabled
                               >
@@ -331,7 +331,7 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                                   <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                                     option.isSelected
                                       ? 'bg-white/20'
-                                      : 'bg-amber-100 dark:bg-amber-800/50'
+                                      : 'bg-warm/10 dark:bg-warm/10'
                                   }`}>
                                     {option.number}
                                   </span>
@@ -346,11 +346,11 @@ const MessageComponent = memo(({ message, index, prevMessage, createDiff, onFile
                             ))}
                           </div>
                           
-                          <div className="bg-amber-100 dark:bg-amber-800/30 rounded-lg p-3">
-                            <p className="text-amber-900 dark:text-amber-100 text-sm font-medium mb-1">
+                          <div className="bg-warm/10 dark:bg-warm/10 rounded-lg p-3">
+                            <p className="text-warm dark:text-warm text-sm font-medium mb-1">
                               {t('interactive.waiting')}
                             </p>
-                            <p className="text-amber-800 dark:text-amber-200 text-xs">
+                            <p className="text-warm dark:text-warm text-xs">
                               {t('interactive.instruction')}
                             </p>
                           </div>

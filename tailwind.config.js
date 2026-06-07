@@ -48,11 +48,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Nanil semantic accents (alpha-aware so /opacity modifiers work)
+        support: {
+          DEFAULT: "hsl(var(--support) / <alpha-value>)",
+          foreground: "hsl(var(--support-foreground))",
+        },
+        warm: {
+          DEFAULT: "hsl(var(--warm) / <alpha-value>)",
+          foreground: "hsl(var(--warm-foreground))",
+        },
       },
       borderRadius: {
+        xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 6px)",
+        sm: "calc(var(--radius) - 10px)",
       },
       spacing: {
         'safe-area-inset-bottom': 'env(safe-area-inset-bottom)',

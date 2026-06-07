@@ -22,39 +22,64 @@
 }
 
 @layer base {
+  /*
+   * NANIL DESIGN SYSTEM — "Die Stimme zwischen den Sitzungen."
+   * Eine ruhige Präsenz, keine App. Dark-first.
+   * Palette (Hex → HSL):
+   *   Background Primary   #0F1115  -> 220 17% 7%
+   *   Background Secondary #171A21  -> 222 18% 11%
+   *   Surface              #1C212B  -> 220 21% 14%
+   *   Primary Accent       #7C5CFF  -> 252 100% 68%
+   *   Support Accent       #7AC7A3  -> 152 41% 63%
+   *   Warm Highlight       #F2B84B  -> 39 87% 62%
+   *   Text Primary         #F8F9FB  -> 220 27% 98%
+   *   Text Secondary       #A0A7B5  -> 220 12% 67%
+   */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Day companion — soft, warm, low-contrast light. Never pure white. */
+    --background: 220 22% 97%;
+    --foreground: 220 25% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --card-foreground: 220 25% 12%;
+    --popover: 220 22% 98%;
+    --popover-foreground: 220 25% 12%;
+    --primary: 252 88% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 93%;
+    --secondary-foreground: 220 25% 18%;
+    --muted: 220 20% 93%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 220 20% 93%;
+    --accent-foreground: 220 25% 18%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 16% 88%;
+    --input: 220 16% 88%;
+    --ring: 252 88% 64%;
+    --radius: 1rem;
+
+    /* Nanil semantic accents */
+    --support: 152 45% 42%;
+    --support-foreground: 0 0% 100%;
+    --warm: 39 82% 48%;
+    --warm-foreground: 30 40% 12%;
+
+    /* Soft light / glow — "Licht im Raum", max 5–10% Intensität */
+    --glow-primary: 252 88% 64% / 0.10;
+    --glow-support: 152 45% 42% / 0.08;
+    --glow-warm: 39 82% 48% / 0.08;
 
     /* Nav design tokens */
-    --nav-glass-bg: 0 0% 100% / 0.7;
+    --nav-glass-bg: 220 22% 99% / 0.7;
     --nav-glass-blur: 20px;
-    --nav-glass-saturate: 1.8;
-    --nav-tab-glow: 221.2 83.2% 53.3% / 0.18;
-    --nav-tab-ring: 221.2 83.2% 53.3% / 0.10;
-    --nav-float-shadow: 0 0% 0% / 0.06;
-    --nav-float-ring: 214.3 31.8% 91.4% / 0.5;
-    --nav-divider-color: 214.3 31.8% 91.4% / 0.5;
-    --nav-input-bg: 210 40% 96.1% / 0.5;
-    --nav-input-focus-ring: 221.2 83.2% 53.3% / 0.22;
+    --nav-glass-saturate: 1.6;
+    --nav-tab-glow: 252 88% 64% / 0.14;
+    --nav-tab-ring: 252 88% 64% / 0.10;
+    --nav-float-shadow: 220 30% 20% / 0.06;
+    --nav-float-ring: 220 16% 88% / 0.5;
+    --nav-divider-color: 220 16% 88% / 0.5;
+    --nav-input-bg: 220 20% 93% / 0.5;
+    --nav-input-focus-ring: 252 88% 64% / 0.20;
 
     /* Safe area CSS variables */
     --safe-area-inset-top: env(safe-area-inset-top);
@@ -85,37 +110,49 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 217.2 91.2% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 217.2 91.2% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 220 13% 46%;
-    --ring: 217.2 91.2% 59.8%;
+    /* Canonical Nanil — deep, calm, trustworthy */
+    --background: 220 17% 7%;
+    --foreground: 220 27% 98%;
+    --card: 222 18% 11%;
+    --card-foreground: 220 27% 98%;
+    --popover: 220 21% 14%;
+    --popover-foreground: 220 27% 98%;
+    --primary: 252 100% 68%;
+    --primary-foreground: 220 27% 98%;
+    --secondary: 220 21% 14%;
+    --secondary-foreground: 220 27% 98%;
+    --muted: 222 18% 11%;
+    --muted-foreground: 220 12% 67%;
+    --accent: 220 21% 16%;
+    --accent-foreground: 220 27% 98%;
+    --destructive: 0 55% 48%;
+    --destructive-foreground: 220 27% 98%;
+    --border: 220 16% 18%;
+    --input: 220 16% 18%;
+    --ring: 252 100% 68%;
+
+    /* Nanil semantic accents */
+    --support: 152 41% 63%;
+    --support-foreground: 220 17% 7%;
+    --warm: 39 87% 62%;
+    --warm-foreground: 30 40% 10%;
+
+    /* Soft light / glow — "Licht im Raum", max 5–10% */
+    --glow-primary: 252 100% 68% / 0.10;
+    --glow-support: 152 41% 63% / 0.08;
+    --glow-warm: 39 87% 62% / 0.08;
 
     /* Nav design tokens — dark overrides */
-    --nav-glass-bg: 217.2 91.2% 8% / 0.55;
+    --nav-glass-bg: 222 18% 11% / 0.55;
     --nav-glass-blur: 24px;
-    --nav-glass-saturate: 1.6;
-    --nav-tab-glow: 217.2 91.2% 59.8% / 0.25;
-    --nav-tab-ring: 217.2 91.2% 59.8% / 0.15;
-    --nav-float-shadow: 0 0% 0% / 0.35;
-    --nav-float-ring: 217.2 32.6% 17.5% / 0.3;
-    --nav-divider-color: 217.2 32.6% 17.5% / 0.5;
-    --nav-input-bg: 217.2 32.6% 17.5% / 0.5;
-    --nav-input-focus-ring: 217.2 91.2% 59.8% / 0.25;
+    --nav-glass-saturate: 1.5;
+    --nav-tab-glow: 252 100% 68% / 0.22;
+    --nav-tab-ring: 252 100% 68% / 0.15;
+    --nav-float-shadow: 220 30% 2% / 0.45;
+    --nav-float-ring: 220 16% 18% / 0.4;
+    --nav-divider-color: 220 16% 18% / 0.5;
+    --nav-input-bg: 220 21% 14% / 0.5;
+    --nav-input-focus-ring: 252 100% 68% / 0.22;
   }
 }
 
@@ -904,4 +941,191 @@
   summary svg[class*="transition-transform"] {
     transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
+
+/* ============================================================================
+ * NANIL DESIGN SYSTEM — Modi, Melierung, Licht, Buttons, Karten
+ * "Da ist eine ruhige Präsenz." Nicht: "Da ist eine App."
+ * ========================================================================== */
+
+@layer base {
+  /*
+   * MELIERUNG — Der Hintergrund darf niemals flach wirken.
+   * Extrem subtile Verläufe: nicht sichtbar, nur spürbar.
+   * Wirkung: Nebel, Abendhimmel, Nordlicht in der Ferne, tiefer Ozean.
+   * Default (dark) = Echo Mode.
+   */
+  .dark body {
+    background-color: #0F1115;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(124, 92, 255, 0.05), transparent 60%),
+      radial-gradient(100% 70% at 100% 110%, rgba(122, 199, 163, 0.035), transparent 55%),
+      linear-gradient(180deg, #0F1115 0%, #141824 50%, #171A21 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* ---- MODE BACKGROUNDS — set on app root / page container ---------------- */
+
+  /* Echo Mode — neutral calm presence (#0F1115 → #141824 → #171A21) */
+  .nanil-echo {
+    background-color: #0F1115;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(124, 92, 255, 0.05), transparent 60%),
+      linear-gradient(180deg, #0F1115 0%, #141824 55%, #171A21 100%);
+  }
+
+  /* Morning Mode — etwas mehr Licht, Wärme, Energie (#0F1115 → #2B2352 → #1A1F2B) */
+  .nanil-morning {
+    background-color: #0F1115;
+    background-image:
+      radial-gradient(110% 70% at 50% -5%, rgba(124, 92, 255, 0.10), transparent 60%),
+      radial-gradient(90% 60% at 80% 0%, rgba(242, 184, 75, 0.06), transparent 55%),
+      linear-gradient(180deg, #0F1115 0%, #2B2352 45%, #1A1F2B 100%);
+  }
+
+  /* Rest Mode — Stress: weniger Reize, mehr Dunkelheit (#0F1115 → #111722 → #0D1016) */
+  .nanil-rest {
+    background-color: #0F1115;
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgba(122, 199, 163, 0.04), transparent 65%),
+      linear-gradient(180deg, #0F1115 0%, #111722 55%, #0D1016 100%);
+  }
+
+  /* Sleep Mode — mehr Tiefe, mehr Dunkelblau, weniger Kontrast (#0B0E13 → #101521 → #0B0E13) */
+  .nanil-sleep {
+    background-color: #0B0E13;
+    background-image:
+      radial-gradient(120% 90% at 50% 30%, rgba(60, 80, 140, 0.06), transparent 70%),
+      linear-gradient(180deg, #0B0E13 0%, #101521 50%, #0B0E13 100%);
+  }
+
+  /* ---- SOFT LIGHT / GLOW — "Licht im Raum", max 5–10% Intensität --------- */
+  .nanil-glow {
+    box-shadow: 0 0 40px -8px hsl(var(--glow-primary));
+  }
+  .nanil-glow-support {
+    box-shadow: 0 0 40px -8px hsl(var(--glow-support));
+  }
+  .nanil-glow-warm {
+    box-shadow: 0 0 40px -8px hsl(var(--glow-warm));
+  }
+  /* A barely-there aura behind focal elements */
+  .nanil-aura {
+    position: relative;
+  }
+  .nanil-aura::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    border-radius: inherit;
+    background: radial-gradient(closest-side, hsl(var(--glow-primary)), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- BUTTON SYSTEM — groß, weich, ruhig. Gefühl: "Drück mich." -------- */
+  .nanil-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.5rem;            /* 56px — großzügige Touch-Fläche */
+    padding: 0 1.75rem;
+    border-radius: 1.25rem;        /* weich gerundet */
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 200ms ease, box-shadow 200ms ease;
+  }
+  .nanil-btn:active { transform: scale(0.985); }
+
+  /* Primary — Primary Accent, weiches Glühen statt harter Schatten */
+  .nanil-btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.4),
+                0 8px 30px -12px hsl(var(--primary) / 0.45);
+  }
+  .nanil-btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.92);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.5),
+                0 10px 36px -10px hsl(var(--primary) / 0.55);
+  }
+
+  /* Soft — ruhige Surface-Fläche, kein Lärm */
+  .nanil-btn-soft {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    box-shadow: inset 0 0 0 1px hsl(var(--border));
+  }
+  .nanil-btn-soft:hover { background-color: hsl(var(--accent)); }
+
+  /* Warm — Tageslicht/Energie (z.B. "Morgen starten") */
+  .nanil-btn-warm {
+    background-color: hsl(var(--warm));
+    color: hsl(var(--warm-foreground));
+    box-shadow: 0 8px 30px -12px hsl(var(--warm) / 0.4);
+  }
+  .nanil-btn-warm:hover { background-color: hsl(var(--warm) / 0.92); }
+
+  /* Ghost — fast nur Text, maximale Ruhe */
+  .nanil-btn-ghost {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+  }
+  .nanil-btn-ghost:hover { background-color: hsl(var(--accent) / 0.6); }
+
+  /* ---- CARD SYSTEM — weiche Flächen, viel Atem, kein harter Rand -------- */
+  .nanil-card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border: 1px solid hsl(var(--border) / 0.6);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 0 0 hsl(0 0% 100% / 0.02) inset,
+                0 18px 50px -30px hsl(220 30% 2% / 0.6);
+  }
+  .nanil-card-quiet {
+    background-color: hsl(var(--muted) / 0.5);
+    border: 1px solid hsl(var(--border) / 0.4);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  /* ---- NOTICE / WARM HIGHLIGHT — eine einzige warme Sprache ------------- */
+  .nanil-notice {
+    background-color: hsl(var(--warm) / 0.10);
+    border: 1px solid hsl(var(--warm) / 0.30);
+    color: hsl(var(--warm));
+    border-radius: 1rem;
+  }
+}
+
+@layer utilities {
+  /* ---- TYPOGRAFIE — viel Weißraum, ruhige Zeilen, langsam werden ------- */
+  .nanil-display {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .nanil-title {
+    font-size: clamp(1.375rem, 3.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .nanil-body {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: hsl(var(--muted-foreground));
+  }
+  .nanil-breathe { letter-spacing: 0.04em; }
 }

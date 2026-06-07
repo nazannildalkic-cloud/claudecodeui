@@ -158,8 +158,8 @@ const NextTaskBanner = ({ onShowAllTasks, onStartTask, className = '' }) => {
                 </div>
               )}
               {nextTask.priority === 'medium' && (
-                <div className="w-4 h-4 rounded bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center" title="Medium Priority">
-                  <Flag className="w-2.5 h-2.5 text-amber-600 dark:text-amber-400" />
+                <div className="w-4 h-4 rounded bg-warm/10 dark:bg-warm/10 flex items-center justify-center" title="Medium Priority">
+                  <Flag className="w-2.5 h-2.5 text-warm dark:text-warm" />
                 </div>
               )}
               {nextTask.priority === 'low' && (

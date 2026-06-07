@@ -37,8 +37,8 @@ const TaskIndicator = ({
       case 'mcp-only':
         return {
           icon: AlertCircle,
-          color: 'text-amber-500 dark:text-amber-400',
-          bgColor: 'bg-amber-50 dark:bg-amber-950',
+          color: 'text-warm dark:text-warm',
+          bgColor: 'bg-warm/10 dark:bg-warm/10',
           label: 'MCP Ready',
           title: 'MCP server configured, TaskMaster needs initialization'
         };

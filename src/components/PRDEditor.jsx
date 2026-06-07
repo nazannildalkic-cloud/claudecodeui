@@ -829,8 +829,8 @@ This document outlines the requirements for building an AI-powered task manageme
           <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full border border-gray-200 dark:border-gray-700">
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="p-2 rounded-full mr-3 bg-yellow-100 dark:bg-yellow-900">
-                  <AlertTriangle className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
+                <div className="p-2 rounded-full mr-3 bg-warm/10 dark:bg-warm/10">
+                  <AlertTriangle className="w-5 h-5 text-warm dark:text-warm" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   File Already Exists
@@ -854,7 +854,7 @@ This document outlines the requirements for building an AI-powered task manageme
                     setShowOverwriteConfirm(false);
                     await performSave();
                   }}
-                  className="px-4 py-2 text-sm text-white bg-yellow-600 hover:bg-yellow-700 rounded-md flex items-center space-x-2 transition-colors"
+                  className="px-4 py-2 text-sm text-warm-foreground bg-warm hover:bg-warm/90 rounded-md flex items-center space-x-2 transition-colors"
                 >
                   <Save className="w-4 h-4" />
                   <span>Overwrite</span>
